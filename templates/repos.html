@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block body %}
+
+{%if repoinfo %}
+<table style="width:100%">
+  <tr>
+    <th>Repo</th>
+    <th>Master</th>
+    <th>Production</th>
+  </tr>
+{% for repo in repoinfo %}
+  <tr class="{% if repo.up_to_date %}up-to-date{% else %}out-of-date{% endif %}">
+    <td><a href="https://github.com/{{ repo.repo_full_name }}">{{ repo.repo_full_name }}</a></td>
+    <td>
+        {% for t in repo.master_tags %}
+            <a href="https://github.com/{{ repo.repo_full_name }}/tree/{{ t.name }}"</a>{{ t.name }}</a><br/>
+        {% endfor %}
+        {% if repo.master_tags|length > 0 %}
+            <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.master_tags[0].commit.sha }}">Commit</a>
+        {% endif %}
+    </td>
+    <td>
+        {% for t in repo.production_tags %}
+            <a href="https://github.com/{{ repo.repo_full_name }}/tree/{{ t.name }}"</a>{{ t.name }}</a><br/>
+        {% endfor %}
+        {% if repo.production_tags|length > 0 %}
+          <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.production_tags[0].commit.sha }}">Commit</a>
+        {% endif %}
+    </td>
+{% endfor %}
+</table>
+{% endif %}
+{% endblock %}

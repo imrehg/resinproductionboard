@@ -1,0 +1,21 @@
+body
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th {
+    font-size: large;
+}
+
+tr.out-of-date {
+    background-color: #FFE5B4;
+}
+
+tr.up-to-date {
+    background-color: LightGreen;
+}
