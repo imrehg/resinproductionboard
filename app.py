@@ -39,11 +39,13 @@ def get_repo_info(repo_full_name):
     thisrepo = {'repo_full_name': repo_full_name,
                 'master_tags': [],
                 'production_tags': [],
-                'up_to_date': False}
+                'up_to_date': False,
+                'master_on_staging': False}
     for tag in repo.get_tags():
         if tag.commit == master_branch.commit:
             thisrepo['master_tags'] += [tag]
-
+            if tag.name.startswith('staging'):
+                thisrepo['master_on_staging'] = True
         if tag.commit == production_branch.commit:
             thisrepo['production_tags'] += [tag]
     for tag in thisrepo['production_tags']:
