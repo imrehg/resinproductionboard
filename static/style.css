@@ -15,7 +15,11 @@ th {
 }
 
 tr.out-of-date {
-    background-color: #FFE5B4;
+    background-color: #FF9933;
+}
+
+tr.out-of-date.master-on-staging {
+    background-color: #FFFF99;
 }
 
 tr.up-to-date {

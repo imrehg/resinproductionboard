@@ -9,7 +9,7 @@
     <th>Production</th>
   </tr>
 {% for repo in repoinfo %}
-  <tr class="{% if repo.up_to_date %}up-to-date{% else %}out-of-date{% endif %}">
+  <tr class="{% if repo.up_to_date %}up-to-date{% else %}out-of-date{% endif %} {% if repo.master_on_staging %}master-on-staging{% endif %}">
     <td><a href="https://github.com/{{ repo.repo_full_name }}">{{ repo.repo_full_name }}</a></td>
     <td>
         {% for t in repo.master_tags %}
