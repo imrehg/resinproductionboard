@@ -1,0 +1,22 @@
+{
+  "name": "productionboard",
+  "scripts": {},
+  "env": {
+    "GITHUB_TOKEN": {
+      "required": true
+    },
+    "REPO_LIST": {
+      "required": true
+    },
+    "SECRET": {
+      "required": true
+    }
+  },
+  "formation": {},
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
