@@ -16,7 +16,7 @@
             <a href="https://github.com/{{ repo.repo_full_name }}/tree/{{ t.name }}"</a>{{ t.name }}</a><br/>
         {% endfor %}
         {% if repo.master_tags|length > 0 %}
-            <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.master_tags[0].commit.sha }}">Commit</a>
+            <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.master_tags[0].commit.sha }}">commit</a>
         {% endif %}
     </td>
     <td>
@@ -24,7 +24,7 @@
             <a href="https://github.com/{{ repo.repo_full_name }}/tree/{{ t.name }}"</a>{{ t.name }}</a><br/>
         {% endfor %}
         {% if repo.production_tags|length > 0 %}
-          <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.production_tags[0].commit.sha }}">Commit</a>
+          <a href="https://github.com/{{ repo.repo_full_name }}/commit/{{ repo.production_tags[0].commit.sha }}">commit</a>
         {% endif %}
     </td>
 {% endfor %}
