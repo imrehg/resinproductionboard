@@ -12,8 +12,11 @@ Required environment variables:
 """
 import os
 from flask import Flask, render_template, flash
+from werkzeug.contrib.cache import SimpleCache
 from github import Github
 APP = Flask(__name__)
+CACHE = SimpleCache()
+CACHE_TIMEOUT = 5 * 60 # 5 minutes
 
 def parse_repolist():
     """Parse watched repos from the `REPO_LIST` env var.
@@ -52,9 +55,12 @@ def get_repo_info(repo_full_name):
 def get_all_repo_info():
     """Prepare all required repo's info
     """
-    all_repo_info = []
-    for repo in WATCH_REPOS:
-        all_repo_info += [get_repo_info(repo['full_name'])]
+    all_repo_info = CACHE.get('all_repo_info')
+    if all_repo_info is None:
+        all_repo_info = []
+        for repo in WATCH_REPOS:
+            all_repo_info += [get_repo_info(repo['full_name'])]
+        CACHE.set('all_repo_info', all_repo_info, timeout=CACHE_TIMEOUT)
     return all_repo_info
 
 @APP.route('/')
