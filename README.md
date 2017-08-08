@@ -1,6 +1,6 @@
 # deployed in production
 
-[![CircleCI](https://circleci.com/gh/imrehg/resinproductionboard.png?circle-token=31d6e1029020203a68c685df4335d7740f0a6a5f]
+[![CircleCI](https://circleci.com/gh/imrehg/resinproductionboard.png?circle-token=31d6e1029020203a68c685df4335d7740f0a6a5f)]()
 
 A minimal web-app that shows the deployed status of projects.
 
