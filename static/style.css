@@ -14,14 +14,18 @@ th {
     font-size: large;
 }
 
-tr.out-of-date {
+.out-of-date {
     background-color: #FF9933;
 }
 
-tr.out-of-date.master-on-staging {
+.out-of-date.master-on-staging {
     background-color: #FFFF99;
 }
 
-tr.up-to-date {
+.up-to-date {
     background-color: LightGreen;
+}
+
+div.repo-name {
+    font-size: large;
 }

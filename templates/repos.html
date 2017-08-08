@@ -2,6 +2,7 @@
 {% block body %}
 
 {%if repoinfo %}
+<p id="help">Legend: <span class="up-to-date">up to date</span> <span class="out-of-date master-on-staging">out of date, master on staging</span> <span class="out-of-date">out of date, not on staging</span></p>
 <table style="width:100%">
   <tr>
     <th>Repo</th>
@@ -10,7 +11,7 @@
   </tr>
 {% for repo in repoinfo %}
   <tr class="{% if repo.up_to_date %}up-to-date{% else %}out-of-date{% endif %} {% if repo.master_on_staging %}master-on-staging{% endif %}">
-    <td><a href="https://github.com/{{ repo.repo_full_name }}">{{ repo.repo_full_name }}</a></td>
+    <td><div class="repo-name"><a href="https://github.com/{{ repo.repo_full_name }}">{{ repo.repo_full_name }}</a></div></td>
     <td>
         {% for t in repo.master_tags %}
             <a href="https://github.com/{{ repo.repo_full_name }}/tree/{{ t.name }}"</a>{{ t.name }}</a><br/>
