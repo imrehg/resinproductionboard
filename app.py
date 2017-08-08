@@ -12,11 +12,21 @@ Required environment variables:
 """
 import os
 from flask import Flask, render_template, flash
-from werkzeug.contrib.cache import SimpleCache
 from github import Github
 APP = Flask(__name__)
-CACHE = SimpleCache()
+
 CACHE_TIMEOUT = 5 * 60 # 5 minutes
+if os.environ.get('MEMCACHIER_SERVERS', None):
+    import bmemcached
+    from werkzeug.contrib.cache import MemcachedCache
+    MEMCACHE = bmemcached.Client(os.environ.get('MEMCACHIER_SERVERS').split(','),
+                                 os.environ.get('MEMCACHIER_USERNAME'),
+                                 os.environ.get('MEMCACHIER_PASSWORD'))
+    CACHE = MemcachedCache(MEMCACHE,
+                           default_timeout=CACHE_TIMEOUT)
+else:
+    from werkzeug.contrib.cache import SimpleCache
+    CACHE = SimpleCache(default_timeout=CACHE_TIMEOUT)
 
 def parse_repolist():
     """Parse watched repos from the `REPO_LIST` env var.
@@ -62,7 +72,7 @@ def get_all_repo_info():
         all_repo_info = []
         for repo in WATCH_REPOS:
             all_repo_info += [get_repo_info(repo['full_name'])]
-        CACHE.set('all_repo_info', all_repo_info, timeout=CACHE_TIMEOUT)
+        CACHE.set('all_repo_info', all_repo_info)
     return all_repo_info
 
 @APP.route('/')
